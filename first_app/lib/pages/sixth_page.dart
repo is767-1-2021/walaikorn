@@ -86,11 +86,10 @@ class _MyCustomFormState extends State<MyCustomForm> {
               if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
                 //currentState!.validate คือเรียก flied ทั้งหมดขึ้นมา
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text('Hoorayyyy = $_firstName $_lastName $_age'),
-                ));
-              
-              _formKey.currentState!.save();
+
+                var response = 'Hoorayyyy = $_firstName $_lastName $_age';
+
+                Navigator.pop(context, response);
               }
             },
             child: Text('validate'),
