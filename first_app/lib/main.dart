@@ -1,4 +1,6 @@
+import 'package:first_app/models/first_form_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'pages/fifth_page.dart';
 import 'pages/first_page.dart';
@@ -9,7 +11,16 @@ import 'pages/sixth_page.dart';
 import 'pages/third_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+        create:(context) => FirstFormModel(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,7 +35,7 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(color: Colors.purple),
         )
       ),
-      initialRoute: '/6',
+      initialRoute: '/1',
       routes: <String, WidgetBuilder> {
         '/1':(context) => FirstPage(),
         '/2': (context) => SecondPage(),

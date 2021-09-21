@@ -148,8 +148,7 @@ class _NewDealState extends State<NewDeal> {
                 _dealdetail.currentState!.save();
 
               print('your deal has created = $_dealtitle $_dealdescription $_location $_numberofpeople');
-            
-  
+ 
               }
             }, 
             child: Text('let someone join your deal'),

@@ -1,4 +1,6 @@
+import 'package:first_app/models/first_form_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SixthPage extends StatelessWidget{
   @override
@@ -32,7 +34,8 @@ class _MyCustomFormState extends State<MyCustomForm> {
           TextFormField(
             decoration: InputDecoration(
               border: UnderlineInputBorder(),
-              labelText: 'Enter your firstname'
+              labelText: 'Enter your firstname',
+              icon: Icon(Icons.business),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -44,11 +47,13 @@ class _MyCustomFormState extends State<MyCustomForm> {
             onSaved: (value) {
               _firstName =value;
             },
+            initialValue: context.read<FirstFormModel>().firstName,
           ),
           TextFormField(
             decoration: InputDecoration(
               border: UnderlineInputBorder(),
-              labelText: 'Enter your lastname'
+              labelText: 'Enter your lastname',
+              icon: Icon(Icons.family_restroom),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -60,11 +65,13 @@ class _MyCustomFormState extends State<MyCustomForm> {
             onSaved: (value) {
               _lastName =value;
             },
+            initialValue: context.read<FirstFormModel>().lastName,
           ),
           TextFormField(
             decoration: InputDecoration(
               border: UnderlineInputBorder(),
-              labelText: 'Enter your age'
+              labelText: 'Enter your age',
+              icon: Icon(Icons.ring_volume),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -80,6 +87,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
             onSaved: (value) {
               _age = int.parse(value!);
             },
+            initialValue: context.read<FirstFormModel>().age.toString(),
           ),
           ElevatedButton(
             onPressed: () {
@@ -87,9 +95,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
                   _formKey.currentState!.save();
                 //currentState!.validate คือเรียก flied ทั้งหมดขึ้นมา
 
-                var response = 'Hoorayyyy = $_firstName $_lastName $_age';
+                context.read<FirstFormModel>().firstName = _firstName;
+                context.read<FirstFormModel>().lastName = _lastName;
+                context.read<FirstFormModel>().age = _age;
 
-                Navigator.pop(context, response);
+                Navigator.pop(context);
               }
             },
             child: Text('validate'),
