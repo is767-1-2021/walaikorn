@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'Join_deal.dart';
 import 'create_deal.dart';
 
 void main() {
@@ -12,11 +13,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'WeDeal',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
-      initialRoute: '/1',
+      initialRoute: '/2',
       routes: <String, WidgetBuilder> {
         '/1':(context) => CreateDeal(),
+        '/2':(context) => JoinDeal(title: 'Join Deal'),
       }
     );
   }
@@ -31,6 +33,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+
 
   void _incrementCounter() {
     setState(() {
