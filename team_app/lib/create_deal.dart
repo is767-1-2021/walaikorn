@@ -32,7 +32,7 @@ class _NewDealState extends State<NewDeal> {
   String? _location;
   int? _numberofpeople;
   String? _category;
-  
+  final items = ['Food & Berverage', 'Entertainment', 'Travel', 'Groceries', 'Other'];
 
   @override
   Widget build(BuildContext context) {
@@ -179,38 +179,52 @@ class _NewDealState extends State<NewDeal> {
               ),
             ),
           ),
-          DropdownButtonFormField<String>(
-            value: _category,
-            isExpanded: true,
-            items: ['Food & Berverage', 'Entertainment', 'Travel', 'Groceries', 'Other'] //list of categories
-            .map((label) => DropdownMenuItem(
-              child: Text(label,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
+          Container(
+            height: 60,
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: Colors.grey),
+               ),
+            child: DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white)
+                ),
               ),
-              value: label,
-            ))
-            .toList(), 
-            hint: Text('Choose category'),
-            onChanged: (value) {
-              setState(() {
-                _category = value;
-              });
-            },
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please choose deal catergory.';
-              }
+              value: _category,
+              isExpanded: true,
+              items: ['Food & Berverage', 'Entertainment', 'Travel', 'Groceries', 'Other'] //list of categories
+              .map((label) => DropdownMenuItem(
+                child: Text(label,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                value: label,
+              ))
+              .toList(), 
+              hint: Text('Choose category'),
+              onChanged: (value) {
+                setState(() {
+                  _category = value;
+                });
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please choose deal catergory.';
+                }
 
-              return null;
-            },
-            onSaved: (value) {
-              _category = value;
-            },
+                return null;
+              },
+              onSaved: (value) {
+                _category = value;
+              },
+            ),
           ),
           const SizedBox(height:60),
           SizedBox(
-            height:60,
+            height:55,
+            width: 300,
             child:ElevatedButton(
               onPressed: () {
                 if (_dealdetail.currentState!.validate()) {
