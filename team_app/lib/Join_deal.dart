@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'Created_Deal_Model.dart';
 
 class JoinDeal extends StatefulWidget{
-   JoinDeal({Key? key, required this.title}) : super(key: key);
-  final String title;
-  
   @override
   _JoinDealState createState() => _JoinDealState();
 }
 
 class _JoinDealState extends State<JoinDeal> {
-
   int _counter = 0;
 
    void _incrementCounter() {
@@ -24,115 +23,173 @@ class _JoinDealState extends State<JoinDeal> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Join Deal')
+        title: Text('Join Deal'),
       ),
       body: Center(
         child: Column(
-         // crossAxisAlignment: CrossAxisAlignment.center,
-         // mainAxisAlignment: MainAxisAlignment.center,//
-          children: <Widget>[
-            
-                   //image: AssetImage('image/profile.png')))),
-          
-              //"John Doe",//
-          
-            DataTable(
-              columns: <DataColumn>[
-                DataColumn(
-                  label: Text('Host',
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                DataColumn(
-                  label: Text('Deal',
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-              ],
-              rows: <DataRow>[
-                DataRow(
-                  cells: <DataCell>[
-                    DataCell(
-                      Expanded(
-                        child: Text('John Doe', 
-                          style: TextStyle(fontSize: 18),
-                          overflow: TextOverflow.clip,
-                        ),
-                      )
-                    ),
-                    DataCell(
-                      Expanded(
-                        child: Text('Buffet hotpot', 
-                          style: TextStyle(fontSize: 18),
-                          overflow: TextOverflow.clip,
-                        ),
-                      )
-                    ),
-                  ]
-                ),
-              ], 
-            ),
-
-            
-            DataTable(
-              columns: <DataColumn>[
-                DataColumn(
-                  label: Text('Deal detail',
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                DataColumn(
-                  label: Text('',
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-              ],
-              rows: <DataRow>[
-                DataRow(
-                  cells: <DataCell>[
-                    DataCell(
-                      Icon(Icons.campaign_rounded)
-                    ),
-                    DataCell(
-                      Expanded(
-                        child: Text('hotpot มา 4 จ่าย 3 เหลือคนละ 259',
-                          maxLines: 3,
-                          style: TextStyle(fontSize: 18),
-                          overflow: TextOverflow.clip, 
-                        ),
+          children: [
+            Table(
+              children: [
+                TableRow(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text('Host',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
-                  ]
-                ),
-                DataRow(
-                  cells: <DataCell>[
-                    DataCell(
-                      Icon(Icons.location_on_rounded)
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text('Deal',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),
-              ], 
-             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+                TableRow(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      child: Image.asset('image/profile.png',
+                      width: 100
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Consumer<CreatedDealModel>(
+                        builder: (context, form, child) {
+                          return Text('${form.dealtitle}',
+                            style: TextStyle(fontSize: 20),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text('John Doe',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text('',
+                        style: TextStyle(fontSize: 20),
+                      ), 
+                    ),
+                  ],
+                ),   
+              ],
+            ),
+            Container(
+              padding: EdgeInsets.all(20),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text('Deal Detail', 
+                  style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(20),
+              alignment: Alignment.centerLeft,
+              child: Consumer<CreatedDealModel>(
+                builder: (context, form, child) {
+                  return Text('${form.dealdescription}',
+                    style: TextStyle(fontSize: 20),
+                  );
+                },
+              ),
+            ),
+            Table(
+              children: [
+                TableRow(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      alignment: Alignment.centerLeft,
+                      child: Text('Location',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      alignment: Alignment.centerLeft,
+                      child: Consumer<CreatedDealModel>(
+                        builder: (context, form, child) {
+                          return Text('${form.location}',
+                            style: TextStyle(fontSize: 20),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Table(
+              children: [
+                TableRow(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      alignment: Alignment.centerLeft,
+                      child: Text('Joiner',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      alignment: Alignment.centerLeft,
+                      child: Consumer<CreatedDealModel>(
+                        builder: (context, form, child) {
+                          return Text('$_counter / ${form.numberofpeople}',
+                            style: TextStyle(fontSize: 20),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Table(
+              children: [
+                TableRow(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      alignment: Alignment.centerLeft,
+                      child: Text('Category',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      alignment: Alignment.centerLeft,
+                      child: Consumer<CreatedDealModel>(
+                        builder: (context, form, child) {
+                          return Text('${form.category}',
+                            style: TextStyle(fontSize: 20),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
       ),
-    
-
-
-
-
-
-
-
-
-
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Joined',
+        onPressed:()=>{
+          _incrementCounter(),
+          Navigator.pop(context)
+        },
         child: Text('Join'),
       ),
     );

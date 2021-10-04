@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'Created_Deal_Model.dart';
 
 class CreateDeal extends StatelessWidget{
   @override
@@ -27,6 +30,7 @@ class _NewDealState extends State<NewDeal> {
   String? _location;
   int? _numberofpeople;
   String? _category;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +64,7 @@ class _NewDealState extends State<NewDeal> {
             onSaved: (value) {
               _dealtitle = value;
             },
+            initialValue: context.read<CreatedDealModel>().dealtitle,
           ),
           Container(
             height: 40,
@@ -71,7 +76,7 @@ class _NewDealState extends State<NewDeal> {
               color: Colors.purple[900],
             ),
           ),
-           TextFormField(
+          TextFormField(
             decoration: InputDecoration(
               border: UnderlineInputBorder(),
               labelText: 'type something'
@@ -86,6 +91,7 @@ class _NewDealState extends State<NewDeal> {
             onSaved: (value) {
               _dealdescription = value;
             },
+            initialValue: context.read<CreatedDealModel>().dealdescription,
           ),
           Container(
             height: 40,
@@ -97,7 +103,7 @@ class _NewDealState extends State<NewDeal> {
               color: Colors.purple[900],
             ),
           ),
-           TextFormField(
+          TextFormField(
             decoration: InputDecoration(
               border: UnderlineInputBorder(),
               labelText: 'Your Deal at ...'
@@ -112,6 +118,7 @@ class _NewDealState extends State<NewDeal> {
             onSaved: (value) {
               _location = value;
             },
+            initialValue: context.read<CreatedDealModel>().location,
           ),
           Container(
             height: 40,
@@ -123,7 +130,7 @@ class _NewDealState extends State<NewDeal> {
               color: Colors.purple[900],
             ),
           ),
-           TextFormField(
+          TextFormField(
             decoration: InputDecoration(
               border: UnderlineInputBorder(),
               labelText: 'How many people you are looking for...'
@@ -142,6 +149,7 @@ class _NewDealState extends State<NewDeal> {
             onSaved: (value) {
               _numberofpeople = int.parse(value!);
             },
+             initialValue: context.read<CreatedDealModel>().numberofpeople.toString(),
           ),
           Container(
             height: 40,
@@ -153,14 +161,19 @@ class _NewDealState extends State<NewDeal> {
               color: Colors.purple[900],
             ),
           ),
-          DropdownButtonFormField<String>(
-            value: _category,
-            items: ['Food & Berverage', 'Entertainment', 'Travel', 'Groceries', 'Other'] //list of categories
+          
+            DropdownButtonFormField<String>(
+              value: _category,
+              isExpanded: true,
+              items: ['Food & Berverage', 'Entertainment', 'Travel', 'Groceries', 'Other'] //list of categories
               .map((label) => DropdownMenuItem(
-                child: Text(label),
+                child: Text(label,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
                 value: label,
               ))
-              .toList(),
+              .toList(), 
             hint: Text('Choose category'),
             onChanged: (value) {
               setState(() {
@@ -178,16 +191,27 @@ class _NewDealState extends State<NewDeal> {
               _category = value;
             },
           ),
-          ElevatedButton(
-            onPressed: () {
-              if (_dealdetail.currentState!.validate()) {
-                _dealdetail.currentState!.save();
+          const SizedBox(height: 40),
+          SizedBox(
+            height:50,
+            child:ElevatedButton(
+              onPressed: () {
+                if (_dealdetail.currentState!.validate()) {
+                  _dealdetail.currentState!.save();
 
-              print('your deal has created = $_dealtitle $_dealdescription $_location $_numberofpeople $_category');
- 
-              }
-            }, 
-            child: Text('let someone join your deal'),
+                  context.read<CreatedDealModel>().dealtitle = _dealtitle;
+                  context.read<CreatedDealModel>().dealdescription = _dealdescription;
+                  context.read<CreatedDealModel>().location = _location;
+                  context.read<CreatedDealModel>().numberofpeople = _numberofpeople;
+                  context.read<CreatedDealModel>().category = _category;
+
+                  Navigator.pop(context);
+                }
+              }, 
+              child: Text('let someone join your deal',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
           ),
         ],
       ),
