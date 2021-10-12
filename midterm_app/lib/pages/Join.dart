@@ -185,7 +185,7 @@ class _JoinDealPageState extends State<JoinDealPage> {
           ],
         ),
       ),
-       floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed:()=>{
           _incrementCounter(),
           Navigator.pop(context)

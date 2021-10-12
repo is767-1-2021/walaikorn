@@ -6,7 +6,7 @@ class CreateDealModel extends ChangeNotifier{
   String? _location;
   int? _numberofpeople;
   String? _category;
-
+  
   get dealtitle => this._dealtitle;
 
    set dealtitle( value) {

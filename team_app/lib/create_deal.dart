@@ -32,7 +32,7 @@ class _NewDealState extends State<NewDeal> {
   String? _location;
   int? _numberofpeople;
   String? _category;
-  final items = ['Food & Berverage', 'Entertainment', 'Travel', 'Groceries', 'Other'];
+  final items = ['Food & Beverage', 'Entertainment', 'Travel', 'Groceries', 'Other'];
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +164,7 @@ class _NewDealState extends State<NewDeal> {
             onSaved: (value) {
               _numberofpeople = int.parse(value!);
             },
-             initialValue: context.read<CreatedDealModel>().numberofpeople.toString(),
+             initialValue: context.read<CreatedDealModel>().numberofpeople,
           ),
           SizedBox(
             height: 60,
@@ -194,7 +194,7 @@ class _NewDealState extends State<NewDeal> {
               ),
               value: _category,
               isExpanded: true,
-              items: ['Food & Berverage', 'Entertainment', 'Travel', 'Groceries', 'Other'] //list of categories
+              items: items 
               .map((label) => DropdownMenuItem(
                 child: Text(label,
                   overflow: TextOverflow.ellipsis,
