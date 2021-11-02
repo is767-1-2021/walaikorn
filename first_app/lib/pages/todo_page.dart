@@ -13,7 +13,7 @@ class TodoPage extends StatefulWidget{
 
 class _TodoPageState extends State<TodoPage> {
   List<Todo> todos = List.empty();
-  bool isLoading = false;
+  bool isLoading = false; 
 
   @override
   void initState() {
