@@ -1,35 +1,44 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Deal {
-  final String caption;
-  final String category;
-  final DateTime createdDateTime;
-  final String createdUser;
-  final int member;
-  final String place;
-  final String title;
-  final String uid;
+  String uid;
+  String title;
+  String caption;
+  String place;
+  int member;
+  String category;
+  String createdUser;
+  DateTime createdDateTime;
   bool isClosed;
+  bool isFav = false;
 
+  Deal(
+    this.uid,
+    this.title,
+    this.caption,
+    this.place,
+    this.member,
+    this.category,
+    this.createdUser,
+    this.createdDateTime,
+    this.isClosed,
+    this.isFav
+  );
 
-  /*constructor */
-  Deal(this.caption, this.category, this.createdDateTime, this.createdUser,
-      this.member, this.place, this.title, this.uid, this.isClosed);
-
-  /*โยนค่าจาก json เป็น map object*/
   factory Deal.fromJson(
     Map<String, dynamic> json,
   ) {
     return Deal(
-      json['caption'] as String,
-      json['category'] as String,
-      json['createdDateTime'].toDate() as DateTime,
-      json['createdUser'] as String,
-      json['member'] as int,
-      json['place'] as String,
-      json['title'] as String,
       json['uid'] as String,
+      json['title'] as String,
+      json['caption'] as String,
+      json['place'] as String,
+      json['member'] as int,
+      json['category'] as String,
+      json['createdUser'] as String,
+      json['createdDateTime'].toDate() as DateTime,
       json['isClosed'] as bool,
+      json['isFav'] as bool,
     );
   }
 }
@@ -52,5 +61,56 @@ class AllDeals {
     }).toList();
 
     return AllDeals(deals);
+  }
+}
+
+class Joiner {
+  String jointID;
+  String jointUID;
+  String jointName;
+  String jointPhone;
+  String jointEmail;
+  String jointImage;
+
+  Joiner(
+    this.jointID,
+    this.jointUID,
+    this.jointName,
+    this.jointPhone,
+    this.jointEmail,
+    this.jointImage,
+  );
+
+  factory Joiner.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    return Joiner(
+        json['jointID'] as String,
+        json['joint_uid'] as String,
+        json['joint_fullname'] as String,
+        json['joint_email'] as String,
+        json['joint_phoneNo'] as String,
+        json['joint_image'] as String);
+  }
+}
+
+class AllJoiners {
+  final List<Joiner> joiners;
+  AllJoiners(this.joiners);
+
+  factory AllJoiners.fromJson(List<dynamic> json) {
+    List<Joiner> joiners;
+
+    joiners = json.map((index) => Joiner.fromJson(index)).toList();
+
+    return AllJoiners(joiners);
+  }
+
+  factory AllJoiners.fromSnapshot(QuerySnapshot s) {
+    List<Joiner> joiners = s.docs.map((DocumentSnapshot ds) {
+      return Joiner.fromJson(ds.data() as Map<String, dynamic>);
+    }).toList();
+
+    return AllJoiners(joiners);
   }
 }

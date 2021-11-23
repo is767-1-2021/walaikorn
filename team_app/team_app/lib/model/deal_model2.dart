@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+
 class DealModel extends ChangeNotifier {
   String? _dealID;
   String? _category;
@@ -124,6 +125,7 @@ class DealModel extends ChangeNotifier {
     data['createdDateTime'] = createdDateTime;
     data['isClosed'] = isClosed;
     data['joint_members'] = joint;
+
     Map<String, dynamic> toJson() {
       final Map<String, dynamic> joint = <String, dynamic>{};
       joint['jointID'] = dealID;

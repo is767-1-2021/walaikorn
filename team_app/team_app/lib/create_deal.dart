@@ -164,7 +164,8 @@ class _NewDealState extends State<NewDeal> {
           TextFormField(
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'How many people you are looking for...'),
+                labelText: 'How many people you are looking for...'
+              ),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter number of people.';

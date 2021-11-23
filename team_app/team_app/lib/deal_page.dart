@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:team_app/chatpage.dart';
 import 'package:team_app/controllers/deal_controller.dart';
+import 'package:team_app/deal_detail.dart';
 import 'package:team_app/model/deal_model.dart';
 import 'package:flutter/material.dart';
 import 'package:team_app/model/user_model2.dart';
@@ -10,7 +11,6 @@ import 'package:team_app/profile.dart';
 import 'package:team_app/services/deal_services.dart';
 import 'around_you.dart';
 import 'create_deal.dart';
-import 'join_deal.dart';
 import 'model/deal_model2.dart';
 import 'package:provider/provider.dart';
 
@@ -36,9 +36,14 @@ class _DealPageState extends State<DealPage> {
     var dealList = ds.getFromFirebase(context.read<UserModel>().uid);
     dealList.then((value) {
       context.read<DealModel>().dealList = value;
+    print(context.read<DealModel>().dealID);
+    print(context.read<UserModel>().uid);
     });
-    super.initState();
 
+
+    super.initState();
+   
+    
     widget.controller.onSync
         .listen((bool synState) => setState(() => isLoading = synState));
   }
@@ -82,13 +87,15 @@ class _DealPageState extends State<DealPage> {
                   itemCount: deals.isEmpty ? 1 : deals.length,
                   itemBuilder: (BuildContext context, int index) {
                     Deal ds = deals[index];
+                    var services = FirebaseServices();
+                    var controller = DealController(services);
                     if (deals.isNotEmpty) {
                       return InkWell(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => JoinDeal()
+                              builder: (context) => DealDetail2(ds: ds, controller: controller)
                             ),
                           );
                         },
