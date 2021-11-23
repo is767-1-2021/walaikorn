@@ -14,6 +14,7 @@ class DealDetail2 extends StatefulWidget {
   const DealDetail2({Key? key, required this.ds, required this.controller})
       : super(key: key);
 
+
   @override
   _DealDetail2State createState() => _DealDetail2State();
 }
@@ -634,8 +635,12 @@ class _DealDetail2State extends State<DealDetail2> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.deepPurple,
         onPressed: () async {
           _incrementCounter();
+            
+          },
 
           ////////// Query duplicated joiner in this deal //////////
           // QuerySnapshot snapshot = await FirebaseFirestore.instance
@@ -728,7 +733,7 @@ class _DealDetail2State extends State<DealDetail2> {
           // ds.joinDeal(joint);
 
           // Navigator.pop(context);
-        },
+        
         child: const Text('Join'),
       ),
     );

@@ -22,7 +22,7 @@ class Deal {
     this.createdUser,
     this.createdDateTime,
     this.isClosed,
-    this.isFav
+    this.isFav,
   );
 
   factory Deal.fromJson(
@@ -71,6 +71,7 @@ class Joiner {
   String jointPhone;
   String jointEmail;
   String jointImage;
+  int JoinerNo;
 
   Joiner(
     this.jointID,
@@ -79,18 +80,21 @@ class Joiner {
     this.jointPhone,
     this.jointEmail,
     this.jointImage,
+    this.JoinerNo,
   );
 
   factory Joiner.fromJson(
     Map<String, dynamic> json,
   ) {
     return Joiner(
-        json['jointID'] as String,
-        json['joint_uid'] as String,
-        json['joint_fullname'] as String,
-        json['joint_email'] as String,
-        json['joint_phoneNo'] as String,
-        json['joint_image'] as String);
+      json['jointID'] as String,
+      json['joint_uid'] as String,
+      json['joint_fullname'] as String,
+      json['joint_email'] as String,
+      json['joint_phoneNo'] as String,
+      json['joint_image'] as String,
+      json['joint_no'] as int,
+    );
   }
 }
 
