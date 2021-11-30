@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1008856635838",
+    "project_id": "is767-2021-walaikorn",
+    "storage_bucket": "is767-2021-walaikorn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1008856635838:android:fb6502f741285f295481ef",
+        "android_client_info": {
+          "package_name": "com.example.final_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1008856635838-9h7glrie6ghe293j1ov1ofbuu79svt9r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrAZjFmJYE2_QwTkdM6AdGkKvFG_dOFFk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1008856635838-9h7glrie6ghe293j1ov1ofbuu79svt9r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

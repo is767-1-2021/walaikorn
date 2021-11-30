@@ -48,7 +48,6 @@ class _DealDetail2State extends State<DealDetail2> {
       joiners = newJoiners;
     });
   }
-
   void _updateDeals(String uid, bool isClosed) async {
     await widget.controller.updateDeals(uid, isClosed);
   }
@@ -64,6 +63,18 @@ class _DealDetail2State extends State<DealDetail2> {
       }
     });
   }
+
+  int joinerNo = 0;
+  void  _joined() {
+    setState(() {
+      if (joinerNo < widget.ds.member) {
+        joinerNo +=1;
+      } else {
+        joinerNo += 0;  
+      }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -638,9 +649,20 @@ class _DealDetail2State extends State<DealDetail2> {
         foregroundColor: Colors.white,
         backgroundColor: Colors.deepPurple,
         onPressed: () async {
-          _incrementCounter();
-            
-          },
+          _joined();  
+          if (joinerNo < widget.ds.member) {
+            FirebaseFirestore.instance
+            .collection('group_deals')
+            .doc()
+            .collection('joint_members')
+            .add({'joint_no': FieldValue.increment(1)});
+          } else {
+          FirebaseFirestore.instance.collection('joint_members')
+          .doc()
+          .update({'joint_no': FieldValue.increment(-1)});
+          }
+        },
+        
 
           ////////// Query duplicated joiner in this deal //////////
           // QuerySnapshot snapshot = await FirebaseFirestore.instance

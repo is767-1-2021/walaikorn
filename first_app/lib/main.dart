@@ -44,8 +44,8 @@ class TodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: TodoPage(
-        controller: controller,
+      home: ThirdPage(
+        //controller: controller,
       ),
     );
   }
@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(color: Colors.purple),
         )
       ),
-      initialRoute: '/5',
+      initialRoute: '/',
       routes: <String, WidgetBuilder> {
         '/1':(context) => FirstPage(),
         '/2': (context) => SecondPage(),

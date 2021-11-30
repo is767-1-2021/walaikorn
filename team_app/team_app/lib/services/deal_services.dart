@@ -1,6 +1,7 @@
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:team_app/model/deal_model.dart';
 import 'package:team_app/model/deal_model2.dart';
 
@@ -11,7 +12,7 @@ abstract class Services {
   Future<List<JointDB>> getJointListFromFirebase( String? uid, String? dealID);
   Future<List<Joiner>> getJoiners(id);
   Future<void> updateDeals(String uid, bool isClosed);
-   Future<void> deleteJoiner(String? dealID, String? jointID);
+  Future<void> deleteJoiner(String? dealID, String? jointID);
 }
 
 class FirebaseServices extends Services {

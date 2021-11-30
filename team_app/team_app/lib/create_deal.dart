@@ -243,7 +243,7 @@ class _NewDealState extends State<NewDeal> {
               onPressed: () async {
                 var services = FirebaseServices();
                 var controller = DealController(services);
-
+  
                 User? user = FirebaseAuth.instance.currentUser;
 
                 if (_dealdetail.currentState!.validate()) {
